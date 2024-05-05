@@ -1,0 +1,6 @@
+#!/usr/bin/python3
+
+from main.iotusb import iotusb
+from sys import argv
+
+iotusb().run(argv[1:])

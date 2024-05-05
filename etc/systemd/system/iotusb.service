@@ -1,0 +1,13 @@
+# IOTUSB - Control devices via USB
+
+[Unit]
+Description=iotusb
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/opt/iotusb/iotusb
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

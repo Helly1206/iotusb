@@ -1,0 +1,55 @@
+#iotusb settings file
+
+general:
+  logging: debug
+
+restapi:
+  enable: true
+  port: 8080
+  username: 
+  password: 
+
+mqtt:
+  enable: true
+  broker: 192.168.x.y
+  port: 1883
+  username: xxxx
+  password: xxxxxxxxx
+  maintopic: myhome
+  hatopic: homeassistant
+  qos: 0
+  retain: true
+
+devices:
+  device1:
+    type: 4relays
+    alias:
+      cmd_suffix: 
+      st_suffix: status
+      relay1: lights
+      relay2: otherlights
+      relay3: spare1
+      relay4: spare2
+      button1: btnlights
+      button2: btnotherlights
+      button3: btnspare1
+      button4: btnspare2
+    eeprom:
+      Enable0: 1
+      Enable1: 1
+      Enable2: 0
+      Enable3: 0
+      Latch0: 1
+      Latch1: 1
+      Latch2: 1
+      Latch3: 1
+      Inverse0: 0
+      Inverse1: 0
+      Inverse2: 0
+      Inverse3: 0
+      Buttonsw0: 0
+      Buttonsw1: 0
+      Buttonsw2: 0
+      Buttonsw3: 0
+      Lowpower: 1
+      LowpowerLEDs: 1
