@@ -1,7 +1,7 @@
 #iotusb settings file
 
 general:
-  logging: debug
+  logging: info
 
 restapi:
   enable: true

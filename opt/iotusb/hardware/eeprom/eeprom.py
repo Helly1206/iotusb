@@ -84,7 +84,10 @@ class eeprom(object):
         return bdata
 
     def calcCRC(self, data):
-        calculator = crc.Calculator(crc.Crc16.CCITT)
+        try:
+            calculator = crc.Calculator(crc.Crc16.XMODEM)
+        except: # versions < 7.0.0
+            calculator = crc.Calculator(crc.Crc16.CCITT)
         return calculator.checksum(bytes.fromhex(data))
 
     def byte2bytes(self, value):
