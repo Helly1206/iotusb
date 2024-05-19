@@ -8,7 +8,6 @@
 
 ####################### IMPORTS #########################
 from json import dumps
-from uuid import getnode
 import logging
 from common.common import common
 mqttclient = common.tryImport("paho.mqtt.client", "paho-mqtt")
@@ -52,10 +51,11 @@ class mqtt(object):
         self.rcDisconnect = 0
         self.client       = None
         if self.enabled: 
+            myUuid = common.getUuid(-6)
             try:
-                self.client = mqttclient.Client(mqttclient.CallbackAPIVersion.VERSION1, "IOTUSB_" + format(getnode(),'X')[-6:])  #create new instance
+                self.client = mqttclient.Client(mqttclient.CallbackAPIVersion.VERSION1, "IOTUSB_" + myUuid)  #create new instance
             except: # version < 2
-                self.client = mqttclient.Client("IOTUSB_" + format(getnode(),'X')[-6:])  #create new instance
+                self.client = mqttclient.Client("IOTUSB_" + myUuid)  #create new instance
             self.client.on_message = self._onmessage #attach function to callback
             self.client.on_connect = self._onconnect  #bind call back function
             self.client.on_disconnect = self._ondisconnect  #bind call back function

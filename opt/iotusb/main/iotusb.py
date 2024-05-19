@@ -28,7 +28,7 @@ from hardware.device import device
 ####################### GLOBALS #########################
 
 APP_NAME = "iotusb"
-VERSION = "0.8.0"
+VERSION = "0.8.2"
 YML_FILE = "/etc/iotusb.yml"
 PORTSNAMES = ["arduino", "pro micro"]
 

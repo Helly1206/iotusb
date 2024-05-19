@@ -1,3 +1,6 @@
+[B]0.8.2[/B]
+- Fixed incorrect uuid regeneration.
+
 [B]0.8.1[/B]
 - Fixed bug on MQTT 2.0>.
 - Fixed bug on CRC 7.0.0>.

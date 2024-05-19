@@ -1,3 +1,9 @@
+iotusb (0.82) stable; urgency=low
+
+  * Fixed incorrect uuid regeneration.
+
+ -- Helly1206 <hellyrulez@hotmail.com>  Sun, 19 may 2024 17:06:28 +0100
+
 iotusb (0.81) stable; urgency=low
 
   * Fixed bug on MQTT 2.0>.

@@ -89,6 +89,24 @@ class common:
         if type(value) is bool:
             retval = 1 if value else 0
         return retval
+    
+    @classmethod
+    def getUuid(cls, chars = 0):
+        myUuid = "1234567890ABCDEF"
+        try:
+            with open("/etc/machine-id") as f:
+                myUuid = f.readline().strip().upper()
+        except:
+            try:
+                with open("/var/lib/dbus/machine-id") as f:
+                    myUuid = f.readline().strip().upper()
+            except:
+                pass
+        if chars > 0:
+            myUuid = myUuid[:chars]
+        elif chars < 0:
+            myUuid = myUuid[chars:]
+        return myUuid
 ######################### MAIN ##########################
 if __name__ == "__main__":
     pass
