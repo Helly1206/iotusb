@@ -107,6 +107,13 @@ class common:
         elif chars < 0:
             myUuid = myUuid[chars:]
         return myUuid
+    
+    @classmethod
+    def doHash(cls, text:str):
+        hash=0
+        for ch in text:
+            hash = ( hash*281  ^ ord(ch)*997) & 0xFFFFFFFF
+        return hex(hash)[2:].upper().zfill(8)
 ######################### MAIN ##########################
 if __name__ == "__main__":
     pass

@@ -102,7 +102,7 @@ class mqtt(object):
     def publishDiscoTopics(self, devname, topics):
         hatopic = common.getsetting(self.settings, "hatopic")
         if self.enabled and self.client and hatopic:
-            ids = format(hash(devname)&(0xFFFFFFFFFFFFFFFF),'X')
+            ids = common.doHash(devname)
             dev = {}
             dev["name"] = devname
             dev["mf"] = MANUFACTURER
