@@ -28,7 +28,7 @@ from hardware.device import device
 ####################### GLOBALS #########################
 
 APP_NAME = "iotusb"
-VERSION = "0.8.2"
+VERSION = "0.9.0"
 YML_FILE = "/etc/iotusb.yml"
 PORTSNAMES = ["arduino", "pro micro"]
 
@@ -156,11 +156,6 @@ class iotusb(object):
         except:
             pass
         return retval
-    
-    def loadDiscoTopics(self):
-        for devname, data in self.devices.items():
-            if data["status"]["port"]:
-                self.mqtt.publishDiscoTopics(devname, data["status"]["device"].getTopics())
 
     def loadModel(self, devname):
         return repr(self.devices[devname]["status"]["device"])

@@ -1,3 +1,9 @@
+iotusb (0.90) stable; urgency=low
+
+  * Fixed mqtt resubscribe on reconnect.
+
+ -- Helly1206 <hellyrulez@hotmail.com>  Sat, 1 jun 2024 08:49:25 +0100
+
 iotusb (0.83) stable; urgency=low
 
   * Fixed hash seeding at every restart.

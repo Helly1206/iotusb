@@ -50,6 +50,7 @@ class mqtt(object):
         self.rcConnect    = 0
         self.rcDisconnect = 0
         self.client       = None
+        self.topics       = {}
         if self.enabled: 
             myUuid = common.getUuid(-6)
             try:
@@ -90,14 +91,19 @@ class mqtt(object):
                 self.logger.exception(e)
                 return
 
-            ####### Subscribe hatopic
-            hatopic = common.getsetting(self.settings, "hatopic")
-            if hatopic:
-                self.client.subscribe(self.buildTopic(hatopic, HASTATUS), QOS)
-
     def add(self, devname, topics):
-        self.subscribeTopics(devname, topics)
-        self.publishDiscoTopics(devname, topics)
+        self.topics[devname] = topics
+        if self.connected:
+            self.subscribeTopics(devname, topics)
+            self.publishDiscoTopics(devname, topics)
+
+    def loadDiscoTopics(self):
+        for devname, topics in self.topics.items():
+            self.publishDiscoTopics(devname, topics)
+
+    def loadSubTopics(self):
+        for devname, topics in self.topics.items():
+            self.subscribeTopics(devname, topics)
 
     def publishDiscoTopics(self, devname, topics):
         hatopic = common.getsetting(self.settings, "hatopic")
@@ -127,7 +133,7 @@ class mqtt(object):
         if hatopic and self.buildTopic(hatopic, HASTATUS) == message.topic:
             if message.payload.decode('utf-8') == HAONLINE:
                 self.logger.debug("MQTT: received HA online, issue HA Discovery")
-                self.base.loadDiscoTopics()
+                self.loadDiscoTopics()
                 return
         self.base.set(self.getDevname(message.topic), self.getTag(message.topic), common.gettype(message.payload.decode('utf-8')))
 
@@ -141,6 +147,15 @@ class mqtt(object):
                 self.logger.info("Bad connection, Returned code = " + str(rc))
             self.connected = False
         self.rcConnect = rc
+
+        if self.connected:
+            ####### Subscribe hatopic
+            hatopic = common.getsetting(self.settings, "hatopic")
+            if hatopic:
+                self.client.subscribe(self.buildTopic(hatopic, HASTATUS), QOS)
+            
+            self.loadSubTopics()
+            self.loadDiscoTopics()
 
     def _ondisconnect(self, client, userdata, rc):
         if rc == 0 or self.rcDisconnect != rc:
