@@ -24,6 +24,7 @@ DEFAULTPORT      = 1883
 DEFAULTHAENABLED = False
 DEFAULTHATOPIC   = "homeassistant"
 MANUFACTURER     = "IOTControl"
+CONNECTIONRETRY  = 5 
 
 #########################################################
 
@@ -75,21 +76,25 @@ class mqtt(object):
             self.client.loop_stop()    #Stop loop
             self.client.disconnect() # disconnect
 
-    def connect(self):
-        if self.enabled and self.client:
-            try:
-                self.logger.info("running")
-                if common.getsetting(self.settings, "username"):
-                    self.client.username_pw_set(common.getsetting(self.settings, "username"), common.getsetting(self.settings, "password"))
-                try:
-                    self.client.connect(common.getsetting(self.settings, "broker"), port=common.getsetting(self.settings, "port", DEFAULTPORT)) #connect to broker
-                    self.client.loop_start() #start the loop
-                except:
-                    self.logger.error("Invalid connection, check server address")
-                    return
-            except Exception as e:
-                self.logger.exception(e)
-                return
+    def connect(self, retry = 1):
+        if retry > 0: # else already connected
+            retry -= 1
+            if self.enabled and self.client:
+                if retry == 0:
+                    try:
+                        self.logger.info("running")
+                        if common.getsetting(self.settings, "username"):
+                            self.client.username_pw_set(common.getsetting(self.settings, "username"), common.getsetting(self.settings, "password"))
+                        try:
+                            self.client.connect(common.getsetting(self.settings, "broker"), port=common.getsetting(self.settings, "port", DEFAULTPORT)) #connect to broker
+                            self.client.loop_start() #start the loop
+                        except:
+                            self.logger.error("Invalid connection, check server address")
+                            retry = CONNECTIONRETRY # retry in 5 seconds
+                    except Exception as e:
+                        self.logger.exception(e)
+                        retry = 0 # no retry, code error
+        return retry
 
     def add(self, devname, topics):
         self.topics[devname] = topics

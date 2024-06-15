@@ -1,3 +1,9 @@
+iotusb (0.91) stable; urgency=low
+
+  * Retry connecting mqtt if broker is not up yet when starting.
+
+ -- Helly1206 <hellyrulez@hotmail.com>  Sat, 15 jun 2024 08:53:18 +0100
+
 iotusb (0.90) stable; urgency=low
 
   * Fixed mqtt resubscribe on reconnect.

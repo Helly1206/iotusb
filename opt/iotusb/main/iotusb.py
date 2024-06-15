@@ -28,7 +28,7 @@ from hardware.device import device
 ####################### GLOBALS #########################
 
 APP_NAME = "iotusb"
-VERSION = "0.9.0"
+VERSION = "0.9.1"
 YML_FILE = "/etc/iotusb.yml"
 PORTSNAMES = ["arduino", "pro micro"]
 
@@ -77,7 +77,7 @@ class iotusb(object):
         self.restapi=restapi(self, APP_NAME, common.getsetting(self.settings, "restapi"), list(self.devices.keys()))
         self.restapi.start()
         self.mqtt=mqtt(self, APP_NAME, common.getsetting(self.settings, "mqtt"))
-        self.mqtt.connect()
+        retry = self.mqtt.connect()
         initial = True
         while not self.term.is_set():
             try:
@@ -99,6 +99,7 @@ class iotusb(object):
             except:
                 pass
             sleep(1)
+            retry = self.mqtt.connect(retry) # reconnect if connection failed the first time
 
     def handleArgs(self, argv):
         if len(sys.argv) > 1:
