@@ -1,3 +1,10 @@
+iotusb (0.92) stable; urgency=low
+
+  * Because pip requires venv from python 3.12, pip removed and apt dependencies added.
+  * crc calculation brought locally.
+
+ -- Helly1206 <hellyrulez@hotmail.com>  Thu, 5 sep 2024 11:39:24 +0100
+
 iotusb (0.91) stable; urgency=low
 
   * Retry connecting mqtt if broker is not up yet when starting.

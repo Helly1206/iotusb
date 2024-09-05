@@ -12,7 +12,6 @@ SERVICEDIR="$ETCDIR/systemd/system"
 SERVICESCRIPT="$NAME.service"
 DAEMON="$NAME.py"
 DEBFOLDER="debian"
-#PIP_INSTALL="$OPTLOC/pip_install.sh"
 
 if [ "$EUID" -ne 0 ]
 then

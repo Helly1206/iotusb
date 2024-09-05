@@ -17,8 +17,8 @@ import logging
 import logging.handlers
 import locale
 from common.common import common
-yaml = common.tryImport("yaml", "pyyaml")
-list_ports = common.tryImport("serial.tools.list_ports", "pyserial")
+import yaml
+import serial.tools.list_ports as list_ports
 from interface.restapi import restapi
 from interface.mqtt import mqtt
 from hardware.device import device
@@ -28,7 +28,7 @@ from hardware.device import device
 ####################### GLOBALS #########################
 
 APP_NAME = "iotusb"
-VERSION = "0.9.1"
+VERSION = "0.9.2"
 YML_FILE = "/etc/iotusb.yml"
 PORTSNAMES = ["arduino", "pro micro"]
 

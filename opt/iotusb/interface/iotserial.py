@@ -12,7 +12,7 @@ from json import dumps, loads
 import logging
 from time import sleep
 from common.common import common
-serial = common.tryImport("serial", "pyserial")
+import serial
 #########################################################
 
 ####################### GLOBALS #########################

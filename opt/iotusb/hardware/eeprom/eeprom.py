@@ -10,7 +10,7 @@
 import struct
 from common.common import common
 import hardware.eeprom.items as items
-crc = common.tryImport("crc", "crc")
+import common.crc as crc
 #########################################################
 
 ####################### GLOBALS #########################

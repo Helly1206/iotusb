@@ -10,7 +10,7 @@
 from json import dumps
 import logging
 from common.common import common
-mqttclient = common.tryImport("paho.mqtt.client", "paho-mqtt")
+import paho.mqtt.client as mqttclient
 #########################################################
 
 ####################### GLOBALS #########################

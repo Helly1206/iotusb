@@ -9,6 +9,8 @@ XB-Plugin-Section: sharing
 Package: iotusb
 Architecture: all
 Depends: python3,
-         python3-pip,
+         python3-serial,
+         python3-paho-mqtt,
+         python3-yaml,
          ${misc:Depends}
 Description: iotusb (Control devices via USB)

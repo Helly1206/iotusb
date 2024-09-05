@@ -26,33 +26,7 @@ class common:
         value = default
         if setting in settings:
             value = settings[setting]
-        return value
-    
-    @classmethod
-    def tryImport(cls, module, package = None, root = False, level = 0):
-        result = None
-        try:
-            result = __import__(module, fromlist=[] if root else [""], level=level)
-        except ImportError:
-            try:
-                import pip
-                try:
-                    if not package:
-                        package = module
-                    if hasattr(pip, 'main'):
-                        pip.main(['install', package])
-                    else:
-                        pip._internal.main(['install', package])
-                except:
-                    print("Unable to install required packages")
-                    print("{} not installed".format(package))
-                    exit(1)
-                result = __import__(module, fromlist=[] if root else [""], level=level)
-            except:
-                print("Pip not installed, please install pip to continue")
-                print("Unable to install the required packages")
-                exit(1)
-        return result
+        return value   
     
     @classmethod
     def Import(cls, module, root = False, level = 0):

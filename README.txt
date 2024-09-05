@@ -1,4 +1,4 @@
-IOTUSB - v0.9.1
+IOTUSB - v0.9.2
 
 IOTUSB - Control devices via USB
 ====== = ======= ======= === ===
